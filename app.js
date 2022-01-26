@@ -11,18 +11,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-  })
+dictators = Array();
+dictators= [
+  {'firstname': 'Mads', 'lastname': 'Tinko', 'birthyear': '1998', 'deathyear': '', 'description': '23 year old programmer'}
+];
+  // app.get('/', (req, res) => {
+  //     res.send('Hello World!')
+  // })
   
   app.post('/dictators', function (req, res) {
-      const firstname = req.body.userName;
+      const firstname = req.body.firstname;
       const lastname = req.body.lastname;
       const birthyear = req.body.birthyear;
       const deathyear = req.body.deathyear;
       const description = req.body.description;
   
-      res.send({'firstname': firstname, 'lastname': lastname})
+      res.send({'firstname': firstname, 'lastname': lastname, 'birthyear': birthyear, 'deathyear': deathyear, 'description': description})
     })
   
   app.listen(port, () => {
