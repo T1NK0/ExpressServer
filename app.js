@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 //Setup cors
 const cors = require('cors');
+const res = require('express/lib/response');
 //Creates a port variable with the value of 3000
 const port = 3000;
 
@@ -31,11 +32,13 @@ app.post('/createDictator', function (req, res) {
   dictators.push(dictator);
 });
 
-app.delete('/deleteDictator', function(req, res){
-  indexDictator = req.body.id
+app.delete('/deleteDictator/:id', function(req, res){
+  const {id} = req.params
+  const dictatorId = dictators.findIndex(parameter => parameter.id == id)
   // indexDictator = IndexOfDictators(dictators);
   //Selects our dictators array, and splice the element of the index. (,1 to indecate we only delete 1 item.)
-  dictators.splice(indexDictator,1);
+  dictators.splice(dictatorId,1);
+  return res.send();
 });
 
 app.listen(port, () => {
